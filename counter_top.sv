@@ -1,3 +1,5 @@
+// Module creating interface and passes it to design and TB
+
 module boss;
 
 Counter_intface cint();

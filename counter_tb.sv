@@ -27,28 +27,60 @@ task load_value (input logic [3:0] load, input int del);
 	#del cint.load <= load;
 endtask
 
+//These are 4 simple tasks checking tasks created above
+task first;
+	load_value(12, 10);
+	switch_reset(1, 10);
+	switch_change(1, 5);
+endtask
 
+task second;
+	load_value(12, 10);
+	switch_reset(1, 10);
+	switch_change(1, 5);
+endtask
+
+task third;
+	load_value(12, 10);
+	switch_reset(1, 10);
+	switch_change(1, 5);
+endtask
+
+task fourth;
+	load_value(12, 10);
+	switch_reset(1, 10);
+	switch_change(1, 5);
+endtask
+
+
+//Initial part of a code: starting values
  initial 
   begin : testing_obj
    cint.chnge <= 1;
    cint.reset <= 0; 
    cint.CLK <= 0;
-   #10 cint.reset <= 1;
-   #10 cint.reset <= 0;
-   #30 cint.chnge <= 0;
-   #10 cint.load <= 3;
-   #20 cint.reset <=1 ;
-   #100 cint.reset <= 0;
-   #300 cint.load <= 11;
+
+  /* case(c1)
+        A: first;
+	B: second;
+	C: third;
+	D: fourth;
+   endcase */
+
+   load_value(12,50);
 
    #1000 $finish;
   end : testing_obj
 
+
+// Part of a code which is supposed to affect simulation a whole time, in my scenario it is only clock going high and low 
  always 
   begin : clock_ticks
    cint.CLK <= 0; #10;
    cint.CLK <= 1; #10;
   end : clock_ticks
+
+
 
 endmodule				
 
