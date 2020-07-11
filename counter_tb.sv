@@ -2,31 +2,30 @@
 
 `timescale 1ns/1ns
 
-module Counter_4bit_tb;
+module Counter_4bit_tb ( Counter_intface cint );
 
- logic reset;
- logic CLK;
- logic chnge;
- logic [3:0] out;
 
- Counter_4bit TestCounter (	.CLK(CLK),
-				.reset(reset),
-				.chnge(chnge),
-				.out(out) );
 
  initial 
   begin
-   chnge <= 1;
-   reset <= 0; 
-   CLK <= 0;
-   #60 chnge <= 0;
+   cint.chnge <= 1;
+   cint.reset <= 0; 
+   cint.CLK <= 0;
+   #10 cint.reset <= 1;
+   #10 cint.reset <= 0;
+   #30 cint.chnge <= 0;
+   #10 cint.load <= 3;
+   #20 cint.reset <=1 ;
+   #100 cint.reset <= 0;
+   #300 cint.load <= 11;
+
+   #1000 $finish;
   end
 
  always 
-  begin 
-   CLK <= 0; #10;
-   CLK <= 1; #10;
-   //CLK <= 0; #10;
+  begin
+   cint.CLK <= 0; #10;
+   cint.CLK <= 1; #10;
   end 
 
 endmodule				
