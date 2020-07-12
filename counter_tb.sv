@@ -11,54 +11,58 @@ module Counter_4bit_tb #(BIT_WIDTH) ( Counter_intface cint );
 // inputs: 1. Reset is being set high or set low 
 // output: changed reset bit 
 task switch_reset (input bit on);				
-	#del cint.reset <= on;
+	cint.reset <= on;
 endtask
 
 // inputs: 1. Chnge is being set high or set low 
 // output: Chnge bit updated
 task switch_change (input bit on);
-	#del cint.chnge <= on;
+	cint.chnge <= on;
 endtask
 
 
 // inputs: 1.Load value counter will start counting from
 // output: counter starts counting using load value as a starting number 
-task load_value (input logic [3:0] load);
-	#del cint.load <= load;
+task load_value (input logic [BIT_WIDTH-1:0] load);
+	cint.load <= load;
 endtask
 
 //These are 4 simple tasks checking tasks created above
 task first;
 	#10 load_value(12);
 	#10 switch_reset(1);
-	#5 switch_change(1);
+	#40 switch_reset(0);
+	#20 switch_reset(0);
+	#10 load_value(5);
+	#30 switch_reset(1);
+	#20 switch_reset(0);
 endtask
 
 task second;
-	#10 load_value(12);
+	#10 load_value(100);
 	#10 switch_reset(1);
 	#5 switch_change(1);
+	#10 switch_reset(1);
+	#50 switch_change(0);
+	#50 switch_change(1);
+	#10 switch_reset(0);
 endtask
 
 task third;
 	#10 load_value(12);
 	#10 switch_reset(1);
-	#5 switch_change(1);
-endtask
-
-task fourth;
+	#5 switch_change(0);
 	#10 load_value(12);
-	#10 switch_reset(1);
-	#5 switch_change(1);
+	#40 switch_reset(0);	
 endtask
 
 
 //Initial part of a code: starting values
  initial 
   begin : testing_obj
-   cint.chnge <= 1;
-   cint.reset <= 0; 
-   cint.CLK <= 0;
+   first;
+   second;
+   third;
 
   /* case(c1)
         A: first;
@@ -67,7 +71,7 @@ endtask
 	D: fourth;
    endcase */
 
-   #50 load_value(100);
+   #550 load_value(100);
    #1000 $finish;
   end : testing_obj
 
