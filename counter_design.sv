@@ -1,9 +1,9 @@
 //design
 
-module Counter_4bit (Counter_intface cint);
+module Counter_4bit #(BIT_WIDTH) (Counter_intface cint);
 
 				
- logic [3:0] load_temp;				//value used as a comparator
+ logic [BIT_WIDTH-1:0] load_temp;				//value used as a comparator
  bit flag = 0;
 
   initial begin

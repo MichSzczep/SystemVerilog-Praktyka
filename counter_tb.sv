@@ -2,54 +2,54 @@
 
 `timescale 1ns/1ns
 
-module Counter_4bit_tb ( Counter_intface cint );
+module Counter_4bit_tb #(BIT_WIDTH) ( Counter_intface cint );
 
  typedef enum logic [2:0] {A, B, C, D} TestCase;
 
  TestCase c1;
 
-// inputs: 1. Reset is being set high or set low 2. When to start it
+// inputs: 1. Reset is being set high or set low 
 // output: changed reset bit 
-task switch_reset (input bit on, input int del);				
+task switch_reset (input bit on);				
 	#del cint.reset <= on;
 endtask
 
-// inputs: 1. Chnge is being set high or set low 2. When to start it
+// inputs: 1. Chnge is being set high or set low 
 // output: Chnge bit updated
-task switch_change (input bit on, input int del);
+task switch_change (input bit on);
 	#del cint.chnge <= on;
 endtask
 
 
-// inputs: 1.Load value counter will start counting from, 2. When to start it
+// inputs: 1.Load value counter will start counting from
 // output: counter starts counting using load value as a starting number 
-task load_value (input logic [3:0] load, input int del);
+task load_value (input logic [3:0] load);
 	#del cint.load <= load;
 endtask
 
 //These are 4 simple tasks checking tasks created above
 task first;
-	load_value(12, 10);
-	switch_reset(1, 10);
-	switch_change(1, 5);
+	#10 load_value(12);
+	#10 switch_reset(1);
+	#5 switch_change(1);
 endtask
 
 task second;
-	load_value(12, 10);
-	switch_reset(1, 10);
-	switch_change(1, 5);
+	#10 load_value(12);
+	#10 switch_reset(1);
+	#5 switch_change(1);
 endtask
 
 task third;
-	load_value(12, 10);
-	switch_reset(1, 10);
-	switch_change(1, 5);
+	#10 load_value(12);
+	#10 switch_reset(1);
+	#5 switch_change(1);
 endtask
 
 task fourth;
-	load_value(12, 10);
-	switch_reset(1, 10);
-	switch_change(1, 5);
+	#10 load_value(12);
+	#10 switch_reset(1);
+	#5 switch_change(1);
 endtask
 
 
@@ -67,8 +67,7 @@ endtask
 	D: fourth;
    endcase */
 
-   load_value(12,50);
-
+   #50 load_value(100);
    #1000 $finish;
   end : testing_obj
 

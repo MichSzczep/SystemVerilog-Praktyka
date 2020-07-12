@@ -1,7 +1,7 @@
 // interface between DUT and TB
 
 
-interface Counter_intface;
+interface Counter_intface #(BIT_WIDTH);
   logic CLK, reset, chnge;
-  logic [3:0] load, out;
+  logic [BIT_WIDTH-1:0] load, out;
 endinterface
