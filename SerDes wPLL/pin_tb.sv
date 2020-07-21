@@ -52,10 +52,10 @@ pin_in <= 0;
 #1000 $finish;
 end : init_block
 
-/* initial 
+initial 
 begin : clk40_block
      forever #25 clk40 <= ~clk40;
-end : clk40_block */
+end : clk40_block 
 
 always
     begin : input_block
