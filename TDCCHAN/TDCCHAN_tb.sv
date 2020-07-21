@@ -11,13 +11,10 @@
 // Tool Versions: 
 // Description: 
 // 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+// My questions:
+// 1. What is tdcclk? What is its frequency or time period? Its edges are being used as an event trigger
+// 2. rdata: is it a "raw"/"reset" data - a value which should appear after reset?
+// 3. 
 
 
 module TDCCHAN_tb;
@@ -55,7 +52,19 @@ TDCCHAN_des dut (   .pin_in(pin_in),
                     .tdc_raw_lock(tdc_raw_lock) );
                     
  //tasks 
- task change_reset
+ task change_reset();           //creates a gap in which reset is on to see how module will behave
+             reset <= 1;
+        #1   reset <= 0;
+ endtask
+ 
+ task change_rstr();            //changes rstr value to the opposite depending on its current one
+        rstr <= ~rstr;
+ endtask
+ 
+task change_rdata();            //changes rdata value to the opposite depending on its current one
+        rstr <= ~rstr;
+endtask
+ 
                     
  //Generating clock signal of frequency 600MHz                     
     initial 
