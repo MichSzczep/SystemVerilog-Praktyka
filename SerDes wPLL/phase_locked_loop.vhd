@@ -1,24 +1,3 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 21.07.2020 01:05:52
--- Design Name: 
--- Module Name: PLL - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -39,14 +18,14 @@ begin
 
 PLLE2_BASE_inst : PLLE2_BASE
    generic map (
-      BANDWIDTH => "OPTIMIZED",  -- OPTIMIZED, HIGH, LOW
-      CLKFBOUT_MULT => 5,        -- Multiply value for all CLKOUT, (2-64)
+      BANDWIDTH => "LOW",  -- OPTIMIZED, HIGH, LOW
+      CLKFBOUT_MULT => 30,        -- Multiply value for all CLKOUT, (2-64)
       CLKFBOUT_PHASE => 0.0,     -- Phase offset in degrees of CLKFB, (-360.000-360.000).
-      CLKIN1_PERIOD => 44.444,      -- Input clock period in ns to ps resolution (i.e. 33.333 is 30 MHz).
+      CLKIN1_PERIOD => 25.0,      -- Input clock period in ns to ps resolution (i.e. 33.333 is 30 MHz).
       -- CLKOUT0_DIVIDE - CLKOUT5_DIVIDE: Divide amount for each CLKOUT (1-128)
-      CLKOUT0_DIVIDE => 1,
-      CLKOUT1_DIVIDE => 1,
-      CLKOUT2_DIVIDE => 1,          -- all multiplied by 15 (to get 600 from 40, but this one needs to be 300, so dividing by 2
+      CLKOUT0_DIVIDE => 2,
+      CLKOUT1_DIVIDE => 2,
+      CLKOUT2_DIVIDE => 4,          -- all multiplied by 15 (to get 600 from 40, but this one needs to be 300, so dividing by 2
       CLKOUT3_DIVIDE => 1,
       CLKOUT4_DIVIDE => 1,
       CLKOUT5_DIVIDE => 1,
