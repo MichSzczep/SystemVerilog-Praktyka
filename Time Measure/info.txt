@@ -1,0 +1,1 @@
+Na ten moment zaimplementowane czytanie z pliku wraz z opisem jak podawać wartości w txt (niestety na razie binarnie).
