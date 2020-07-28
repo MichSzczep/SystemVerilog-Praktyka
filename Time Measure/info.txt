@@ -1,1 +1,2 @@
-Na ten moment zaimplementowane czytanie z pliku wraz z opisem jak podawać wartości w txt (niestety na razie binarnie).
+Na ten moment zaimplementowane czytanie z pliku wraz z opisem jak podawać wartości w .txt (niestety na razie binarnie).
+Oprócz tego należy podać własną ścieżkę do pliku w linii 75 pliku own_tb, gdyż vivado rżnie głupa i nie zczytuje wartości po podaniu samej nazwy pliku .txt, pomimo dołączenia go do projektu
